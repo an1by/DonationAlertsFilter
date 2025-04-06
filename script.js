@@ -6,10 +6,10 @@ for await (let filterName of filterNames) {
         `https://raw.githubusercontent.com/an1by/DonationAlertsFilter/refs/heads/master/filters/${filterName}.txt`
     );
     const responseWords = (await response.text()).replaceAll("\n", " ");
-    words.push(...responseWords);
+    words.push(responseWords);
 }
 
-var encodedData = encodeURIComponent(`main_currency=RUB&timezone=Europe%2FMoscow&language=ru_RU&remove_links=1&black_list_words=${words}&words=&email_news=0`);
+var encodedData = encodeURIComponent(`main_currency=RUB&timezone=Europe%2FMoscow&language=ru_RU&remove_links=1&black_list_words=${words.join(" ")}&words=&email_news=0`);
 var body = `data=${encodedData}&form=settings_general`
 
 fetch("https://www.donationalerts.com/savesettings/general", {
